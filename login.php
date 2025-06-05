@@ -22,8 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['password'])) {
       session_start();
       // Spremaš samo što treba:
-      $_SESSION["user_id"] = $user["id"];
-      $_SESSION["username"] = $user["username"];
+     $_SESSION["user"] = [
+  "id" => $user["id"],
+  "username" => $user["username"]
+];
 
       header("Location: index.php");
       exit;

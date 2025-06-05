@@ -1,23 +1,23 @@
 <?php
 session_start();
+require 'db.php';
 
-// Definiraj proizvode (obično dolaze iz baze, ali za početak hardkodirano)
-$products = [
-    1 => ['name' => 'Daft Punk Majica', 'price' => 25.00],
-    2 => ['name' => 'Daft Punk Kapa', 'price' => 15.00],
-    3 => ['name' => 'Random Access Memories Album', 'price' => 40.00],
-];
+// Dohvati proizvode iz baze
+$products = [];
+$stmt = $pdo->query("SELECT * FROM products");
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $products[$row['id']] = $row;
+}
 
-// Inicijaliziraj košaricu ako ne postoji
+// Inicijalizacija košarice
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Dodavanje proizvoda u košaricu
+// Dodavanje u košaricu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     $productId = (int)$_POST['product_id'];
     if (isset($products[$productId])) {
-        // Ako proizvod već postoji u košarici, povećaj količinu
         if (isset($_SESSION['cart'][$productId])) {
             $_SESSION['cart'][$productId]++;
         } else {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     }
 }
 
-// Brisanje proizvoda iz košarice
+// Uklanjanje iz košarice
 if (isset($_GET['remove'])) {
     $removeId = (int)$_GET['remove'];
     if (isset($_SESSION['cart'][$removeId])) {
@@ -35,7 +35,6 @@ if (isset($_GET['remove'])) {
         $message = "Proizvod uklonjen iz košarice.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -56,18 +55,22 @@ if (isset($_GET['remove'])) {
     <?php endif; ?>
 
     <div class="row">
+        <!-- Proizvodi -->
         <div class="col-md-8">
             <h2>Proizvodi</h2>
             <div class="row">
                 <?php foreach ($products as $id => $product): ?>
                 <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card h-100">
+                        <?php if (!empty($product['image'])): ?>
+                          <img src="<?= htmlspecialchars($product['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name']) ?>">
+                        <?php endif; ?>
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?= htmlspecialchars($product['name']) ?></h5>
                             <p class="card-text">Cijena: <?= number_format($product['price'], 2) ?> €</p>
-                            <form method="post" class="d-inline">
+                            <form method="post" class="mt-auto">
                                 <input type="hidden" name="product_id" value="<?= $id ?>">
-                                <button type="submit" class="btn btn-primary">Dodaj u košaricu</button>
+                                <button type="submit" class="btn btn-primary w-100">Dodaj u košaricu</button>
                             </form>
                         </div>
                     </div>
@@ -76,23 +79,29 @@ if (isset($_GET['remove'])) {
             </div>
         </div>
 
+        <!-- Košarica -->
         <div class="col-md-4">
             <h2>Košarica</h2>
             <?php if (empty($_SESSION['cart'])): ?>
                 <p>Košarica je prazna.</p>
             <?php else: ?>
-                <ul class="list-group">
+                <ul class="list-group mb-3">
                     <?php
                     $total = 0;
                     foreach ($_SESSION['cart'] as $prodId => $qty):
+                        if (!isset($products[$prodId])) continue;
                         $prod = $products[$prodId];
                         $subtotal = $prod['price'] * $qty;
                         $total += $subtotal;
                     ?>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <?= htmlspecialchars($prod['name']) ?> x <?= $qty ?>
-                        <span><?= number_format($subtotal, 2) ?> €</span>
-                        <a href="?remove=<?= $prodId ?>" class="btn btn-sm btn-danger ms-2">X</a>
+                        <div>
+                            <?= htmlspecialchars($prod['name']) ?> x <?= $qty ?>
+                        </div>
+                        <div>
+                            <span><?= number_format($subtotal, 2) ?> €</span>
+                            <a href="?remove=<?= $prodId ?>" class="btn btn-sm btn-danger ms-2">X</a>
+                        </div>
                     </li>
                     <?php endforeach; ?>
                     <li class="list-group-item d-flex justify-content-between">
@@ -100,6 +109,14 @@ if (isset($_GET['remove'])) {
                         <strong><?= number_format($total, 2) ?> €</strong>
                     </li>
                 </ul>
+
+                <?php if (isset($_SESSION['user'])): ?>
+                    <form action="narudzba.php" method="post">
+                        <button type="submit" class="btn btn-success w-100">Završi narudžbu</button>
+                    </form>
+                <?php else: ?>
+                    <div class="alert alert-warning">Prijavite se kako biste završili narudžbu.</div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>

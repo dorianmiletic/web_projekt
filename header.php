@@ -16,7 +16,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'index.php' ? ' active' : '' ?>" href="index.php">Početna</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'biografija.php' ? ' active' : '' ?>" href="biografija.php">Biografija</a>
+          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'spotify.php' ? ' active' : '' ?>" href="spotify.php">Spotify</a>
         </li>
         <li class="nav-item">
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'diskografija.php' ? ' active' : '' ?>" href="diskografija.php">Diskografija</a>
@@ -25,14 +25,14 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'shop.php' ? ' active' : '' ?>" href="shop.php">Web Shop</a>
         </li>
 
-        <?php if (isset($_SESSION['username'])): ?>
-          <li class="nav-item">
-            <span class="nav-link">👤 <?= htmlspecialchars($_SESSION['username']) ?></span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout.php">Odjava</a>
-          </li>
-        <?php else: ?>
+        <?php if (isset($_SESSION['user'])): ?>
+            <li class="nav-item">
+         <span class="nav-link">👤 <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+            </li>
+            <li class="nav-item">
+             <a class="nav-link" href="logout.php">Odjava</a>
+            </li>
+              <?php else: ?>
           <li class="nav-item">
             <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'login.php' ? ' active' : '' ?>" href="login.php">Prijava</a>
           </li>
