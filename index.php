@@ -26,11 +26,11 @@ if (session_status() == PHP_SESSION_NONE) {
     }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <?php include 'header.php'; ?>
 
-  <div class="container py-4">
+<div class="container py-4 flex-grow-1">
     <div class="row g-4">
       <main class="col-lg-8 col-md-7 col-sm-12">
         <h1>Dobrodošli na fan stranicu Daft Punka!</h1>

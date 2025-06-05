@@ -22,7 +22,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'diskografija.php' ? ' active' : '' ?>" href="diskografija.php">Diskografija</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'kontakt.php' ? ' active' : '' ?>" href="kontakt.php">Kontakt</a>
+          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'shop.php' ? ' active' : '' ?>" href="shop.php">Web Shop</a>
         </li>
 
         <?php if (isset($_SESSION['username'])): ?>
