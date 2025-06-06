@@ -15,24 +15,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $error = "Unesite valjani email.";
   } else {
-    $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
+    $stmt = $pdo->prepare("SELECT id, username, password, is_admin FROM users WHERE email = ?");
+$stmt->execute([$email]);
+$user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password'])) {
-      session_start();
-      // Spremaš samo što treba:
-     $_SESSION["user"] = [
-  "id" => $user["id"],
-  "username" => $user["username"]
-];
+if ($user && password_verify($password, $user['password'])) {
+    session_start();
+    $_SESSION["user"] = [
+        "id" => $user["id"],
+        "username" => $user["username"],
+        "is_admin" => (bool)$user["is_admin"]  // Ovdje spremi bool is_admin
+    ];
 
-      header("Location: index.php");
-      exit;
-    } else {
-      $error = "Neispravna email adresa ili lozinka.";
-    }
-  }
+    header("Location: index.php");
+    exit;
+}}
 }
 
 // Output buffering
