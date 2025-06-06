@@ -148,3 +148,4 @@ function validateForm() {
 $content = ob_get_clean();
 $title = "Registracija - Daft Punk Fan";
 include 'layout.php';
+?>
