@@ -19,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'spotify.php' ? ' active' : '' ?>" href="/web_projekt/spotify.php">Spotify</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'diskografija.php' ? ' active' : '' ?>" href="/web_projekt/index.php">Diskografija</a>
+          <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'diskografija.php' ? ' active' : '' ?>" href="/web_projekt/diskografija.php">Diskografija</a>
         </li>
         <li class="nav-item">
           <a class="nav-link<?= basename($_SERVER['PHP_SELF']) == 'shop.php' ? ' active' : '' ?>" href="/web_projekt/shop.php">Web Shop</a>
