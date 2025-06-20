@@ -7,7 +7,7 @@ require 'db.php';
 $error = '';
 $email = '';
 
-// Ako je forma poslana
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = trim($_POST["email"]);
   $password = $_POST["password"];
@@ -24,7 +24,7 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION["user"] = [
         "id" => $user["id"],
         "username" => $user["username"],
-        "is_admin" => (bool)$user["is_admin"]  // Ovdje spremi bool is_admin
+        "is_admin" => (bool)$user["is_admin"]  
     ];
 
     header("Location: index.php");
@@ -32,7 +32,7 @@ if ($user && password_verify($password, $user['password'])) {
 }}
 }
 
-// Output buffering
+
 ob_start();
 ?>
 

@@ -16,19 +16,19 @@
     body {
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* Full viewport height */
+      min-height: 100vh; 
       background-color: #f8f9fa;
     }
 
     #page-container {
-      flex: 1 0 auto; /* raste i zauzima prostor između header i footer */
+      flex: 1 0 auto; 
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
 
     footer {
-      flex-shrink: 0; /* ne smanjuj footer */
-      background-color: #212529; /* možeš promijeniti po želji */
+      flex-shrink: 0; 
+      background-color: #212529; 
       color: white;
       padding: 1rem 0;
     }

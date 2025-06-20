@@ -15,7 +15,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = (int)$_GET['id'];
 
-// Obriši proizvod iz baze
+
 $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
 $stmt->execute([$id]);
 

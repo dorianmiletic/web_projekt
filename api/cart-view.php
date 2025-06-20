@@ -45,7 +45,7 @@ $total = 0;
 <?php endif; ?>
 
 <script>
-// Dodaj event listener za uklanjanje proizvoda iz košarice putem AJAX-a
+
 document.querySelectorAll('.remove-from-cart').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -58,7 +58,7 @@ document.querySelectorAll('.remove-from-cart').forEach(btn => {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        updateCart(); // ponovno osvježi košaricu
+        updateCart(); 
       } else {
         alert('Greška pri uklanjanju proizvoda.');
       }

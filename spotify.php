@@ -1,5 +1,5 @@
 <?php
-// spotify.php
+
 session_start();
 ?>
 

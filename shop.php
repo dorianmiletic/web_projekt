@@ -2,14 +2,14 @@
 session_start();
 require 'db.php';
 
-// Dohvati proizvode za prikaz u košarici
+
 $products = [];
 $stmt = $pdo->query("SELECT * FROM products");
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $products[$row['id']] = $row;
 }
 
-// Inicijalizacija košarice
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -33,15 +33,15 @@ if (!isset($_SESSION['cart'])) {
         <div class="col-md-8">
             <h2>Proizvodi</h2>
             <div class="row" id="products-container">
-                <!-- Proizvodi će se učitati putem JavaScript-a -->
+              
             </div>
         </div>
 
-        <!-- Košarica -->
+       
         <div class="col-md-4">
             <h2>Košarica</h2>
             <div id="cart-container">
-              <!-- Košarica će se učitati AJAX-om -->
+             
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['cart'])) {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Učitaj proizvode i prikaži
+ 
   fetch('api/products.php')
     .then(response => response.json())
     .then(products => {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(col);
       });
 
-      // Poveži evente za dodavanje u košaricu
+      
       setupAddToCartButtons();
     })
     .catch(error => {
@@ -85,24 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('products-container').innerHTML = '<p class="text-danger">Greška pri učitavanju proizvoda.</p>';
     });
 
-  // Učitaj košaricu i prikaži
   updateCart();
 });
 
-// Funkcija za učitavanje i prikaz košarice
+
 function updateCart() {
   fetch('api/cart-view.php')
     .then(res => res.text())
     .then(html => {
       document.getElementById('cart-container').innerHTML = html;
-      setupRemoveButtons(); // Poveži evente za uklanjanje
+      setupRemoveButtons(); 
     })
     .catch(err => {
       console.error('Greška pri osvježavanju košarice:', err);
     });
 }
 
-// Event handler za dodavanje u košaricu
+
 function setupAddToCartButtons() {
   document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -116,8 +115,7 @@ function setupAddToCartButtons() {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          // Mjesto za lijepu notifikaciju, npr. alert ili toast
-          // alert(data.message);
+         
           updateCart();
         } else {
           alert("Greška: " + data.message);
@@ -131,7 +129,7 @@ function setupAddToCartButtons() {
   });
 }
 
-// Event handler za uklanjanje iz košarice
+
 function setupRemoveButtons() {
   document.querySelectorAll('.remove-from-cart-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {

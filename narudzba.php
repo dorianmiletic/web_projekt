@@ -12,11 +12,10 @@ if (empty($_SESSION['cart'])) {
     exit;
 }
 
-// Dohvati korisnika i košaricu
+
 $userId = $_SESSION['user']['id'];
 $cart = $_SESSION['cart'];
 
-// Dohvati proizvode iz baze
 $products = [];
 $stmt = $pdo->query("SELECT * FROM products");
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -26,12 +25,12 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 try {
     $pdo->beginTransaction();
 
-    // 1. Unesi novu narudžbu
+    
     $stmt = $pdo->prepare("INSERT INTO orders (user_id) VALUES (:user_id)");
     $stmt->execute(['user_id' => $userId]);
     $orderId = $pdo->lastInsertId();
 
-    // 2. Unesi stavke
+   
    $stmtItem = $pdo->prepare("INSERT INTO order_items (order_id, product_name, quantity, price) VALUES (:order_id, :product_name, :qty, :price)");
 
 foreach ($cart as $prodId => $qty) {
@@ -50,7 +49,7 @@ foreach ($cart as $prodId => $qty) {
 
     $pdo->commit();
 
-    // Očisti košaricu
+   
     $_SESSION['cart'] = [];
 
     $success = true;

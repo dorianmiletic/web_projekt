@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST["password"];
   $password_confirm = $_POST["password_confirm"];
 
-  // Server-side validacija
+
   if (strlen($username) < 3) {
     $error = "Korisničko ime mora imati barem 3 znaka.";
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -35,12 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-// Output buffering za sadržaj stranice
+
 ob_start();
 ?>
 
 <style>
-  /* Centrirana i sužena forma */
+  
   .form-container {
     max-width: 400px;
     margin: 40px auto;
@@ -49,7 +49,7 @@ ob_start();
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  /* Dugme za prikaz lozinke bez okvira */
+
   .password-toggle {
     background: transparent;
     border: none;

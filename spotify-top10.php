@@ -3,11 +3,11 @@
 
 header('Content-Type: application/json');
 
-// 🔒 Spotify API pristupni podaci
-$clientId = '5d4ad03ed0ab4ad38f1d18c277a62950'; // zamijeni ako je drugačiji
-$clientSecret = '7b396f69f97c4e819fae1228cef4f621'; // ⚠️ Unesi pravi secret
 
-// 1. Dohvati access token (Client Credentials Flow)
+$clientId = '5d4ad03ed0ab4ad38f1d18c277a62950'; 
+$clientSecret = '7b396f69f97c4e819fae1228cef4f621'; 
+
+
 $authUrl = 'https://accounts.spotify.com/api/token';
 $credentials = base64_encode("$clientId:$clientSecret");
 
@@ -35,7 +35,7 @@ if (!isset($data['access_token'])) {
 
 $accessToken = $data['access_token'];
 
-// 2. Dohvati top pjesme izvođača (Daft Punk ID: 4tZwfgrHOc3mvqYlEYSvVi)
+
 $artistId = '4tZwfgrHOc3mvqYlEYSvVi';
 $apiUrl = "https://api.spotify.com/v1/artists/$artistId/top-tracks?market=HR";
 

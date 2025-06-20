@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-// Spotify API ključevi
+
 $clientId = '5d4ad03ed0ab4ad38f1d18c277a62950';
 $clientSecret = '7b396f69f97c4e819fae1228cef4f621';
 
-// Mapiranje albuma na nazive slika
+
 $album_images = [
     'homework' => 'homework.jpg',
     'discovery' => 'discovery.jpg',
@@ -15,7 +15,7 @@ $album_images = [
     'tron_legacy' => 'tron_legacy.jpg'
 ];
 
-// Definiramo pjesme za svaki album (bez spotify_id jer ih dohvaćamo dinamički)
+
 $albums = [
     'homework' => [
         'title' => 'Homework',
@@ -131,7 +131,7 @@ $albums = [
     ]
 ];
 
-// Funkcija za dohvaćanje Spotify access tokena
+
 function getSpotifyAccessToken($clientId, $clientSecret) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://accounts.spotify.com/api/token');
@@ -148,7 +148,7 @@ function getSpotifyAccessToken($clientId, $clientSecret) {
     return isset($data['access_token']) ? $data['access_token'] : null;
 }
 
-// Funkcija za pretraživanje Spotify track ID-a
+
 function getSpotifyTrackId($trackName, $albumName, $accessToken) {
     $query = urlencode("track:$trackName album:$albumName artist:Daft Punk");
     $url = "https://api.spotify.com/v1/search?q=$query&type=track&limit=1";
@@ -164,7 +164,7 @@ function getSpotifyTrackId($trackName, $albumName, $accessToken) {
     return isset($data['tracks']['items'][0]['id']) ? $data['tracks']['items'][0]['id'] : null;
 }
 
-// Dohvaćamo album iz URL-a
+
 $album_key = isset($_GET['album']) ? strtolower(trim($_GET['album'])) : '';
 
 if (!array_key_exists($album_key, $albums)) {
@@ -174,7 +174,7 @@ if (!array_key_exists($album_key, $albums)) {
     $album = $albums[$album_key];
     $error = null;
 
-    // Dohvaćamo Spotify track ID-ove ako nisu već cacheirani
+  
     if (!isset($_SESSION['spotify_track_ids'][$album_key])) {
         $accessToken = getSpotifyAccessToken($clientId, $clientSecret);
         if ($accessToken) {

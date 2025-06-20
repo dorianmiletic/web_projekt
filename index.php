@@ -18,12 +18,12 @@ if (session_status() == PHP_SESSION_NONE) {
   <?php include 'header.php'; ?>
 
   <div class="main-section">
-    <!-- Lijeva slika: Guy-Manuel de Homem-Christo -->
+   
     <div class="side-image left">
       <img src="images/guy.jpg" alt="Guy-Manuel de Homem-Christo">
     </div>
 
-    <!-- Središnji sadržaj -->
+    
     <div class="center-content">
       <h1>Dobrodošli na stranicu Daft Punka!</h1>
       <div class="video-container mb-4">
@@ -35,7 +35,7 @@ if (session_status() == PHP_SESSION_NONE) {
       <a href="diskografija.php" class="btn btn-primary btn-lg">Istraži diskografiju</a>
     </div>
 
-    <!-- Desna slika: Thomas Bangalter -->
+    
     <div class="side-image right">
       <img src="images/thomas.jpg" alt="Thomas Bangalter">
     </div>

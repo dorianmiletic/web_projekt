@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $db   = 'projekt';
-$user = 'root';       // ili tvoje korisničko ime
-$pass = '';           // prazno ako nemaš lozinku, ili tvoja lozinka
+$user = 'root';       
+$pass = '';           
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

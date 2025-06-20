@@ -13,7 +13,7 @@ if (!isset($data['product_id'])) {
 
 $productId = (int)$data['product_id'];
 
-// Dohvati proizvod iz baze
+
 $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
 $stmt->execute([$productId]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@ if (!$product) {
     exit;
 }
 
-// Inicijaliziraj košaricu ako ne postoji
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }

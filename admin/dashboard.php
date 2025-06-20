@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Provjera je li korisnik admin
+
 if (!isset($_SESSION['user']['is_admin']) || $_SESSION['user']['is_admin'] !== true) {
     header('Location: ../login.php');
     exit;
@@ -9,7 +9,7 @@ if (!isset($_SESSION['user']['is_admin']) || $_SESSION['user']['is_admin'] !== t
 
 require '../db.php';
 
-// Dohvati proizvode iz baze
+
 $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

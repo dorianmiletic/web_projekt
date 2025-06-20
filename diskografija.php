@@ -20,7 +20,7 @@ session_start();
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-    <!-- Homework -->
+    
     <div class="col">
       <a href="album.php?album=homework" class="text-decoration-none">
         <div class="card h-100">
@@ -33,7 +33,7 @@ session_start();
       </a>
     </div>
 
-    <!-- Discovery -->
+    
     <div class="col">
       <a href="album.php?album=discovery" class="text-decoration-none">
         <div class="card h-100">
@@ -46,7 +46,7 @@ session_start();
       </a>
     </div>
 
-    <!-- Human After All -->
+   
     <div class="col">
       <a href="album.php?album=human_after_all" class="text-decoration-none">
         <div class="card h-100">
@@ -59,7 +59,7 @@ session_start();
       </a>
     </div>
 
-    <!-- Random Access Memories -->
+    
     <div class="col">
       <a href="album.php?album=random_access_memories" class="text-decoration-none">
         <div class="card h-100">
@@ -72,7 +72,7 @@ session_start();
       </a>
     </div>
 
-    <!-- Alive 2007 -->
+   
     <div class="col">
       <a href="album.php?album=alive_2007" class="text-decoration-none">
         <div class="card h-100">
@@ -85,7 +85,7 @@ session_start();
       </a>
     </div>
 
-    <!-- Tron: Legacy -->
+    
     <div class="col">
       <a href="album.php?album=tron_legacy" class="text-decoration-none">
         <div class="card h-100">
